@@ -29,14 +29,14 @@ export default function Dashboard() {
             <h2 className="text-lg font-semibold text-ink">
               {activeSection === "tasks" ? "Tasks" : "Calendar"}
             </h2>
-            <button
+            {/* <button
               type="button"
               aria-label="Open sidebar"
               onClick={() => setSidebarOpen(true)}
               className="rounded-xl border bg-card-bg p-2 shadow-sm"
             >
               <Menu className="h-5 w-5 text-ink" />
-            </button>
+            </button> */}
           </div>
 
           {activeSection === "tasks" ? <TaskList /> : <CalendarView />}
