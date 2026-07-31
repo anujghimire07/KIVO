@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  // On mount, verify the JWT cookie against the protected route
+  // On mount, verify the stored JWT against the protected route
   useEffect(() => {
     api("/home", { method: "GET" })
       .then((res) => {
@@ -16,11 +16,13 @@ export function AuthProvider({ children }) {
           const email = localStorage.getItem("kivo_email")
           setUser(email ? { email } : {})
         } else {
+          localStorage.removeItem("kivo_token")
           localStorage.removeItem("kivo_email")
           setUser(null)
         }
       })
       .catch(() => {
+        localStorage.removeItem("kivo_token")
         localStorage.removeItem("kivo_email")
         setUser(null)
       })
@@ -31,6 +33,8 @@ export function AuthProvider({ children }) {
     const res = await api("/login", { method: "POST", body: JSON.stringify({ email, password }) })
     if (res.ok) {
       try {
+        const token = res.data?.token
+        if (token) localStorage.setItem("kivo_token", token)
         localStorage.setItem("kivo_email", email)
       } catch {
         /* ignore */
@@ -47,6 +51,7 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     await api("/logout", { method: "POST" })
     try {
+      localStorage.removeItem("kivo_token")
       localStorage.removeItem("kivo_email")
     } catch {
       /* ignore */

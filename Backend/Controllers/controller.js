@@ -99,15 +99,16 @@ async function login(req, res) {
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
     )
-    // res.cookie("token", token, { httpOnly: true })//*httpOnly prevents XSS attacks, only server can access cookie
-    res.cookie("token", token, { //! changed here: added sameSite/secure options so the cookie works cross-site (Vercel frontend -> Render backend) in production
-        httpOnly: true, //*httpOnly prevents XSS attacks, only server can access cookie
+    //! keep setting the cookie for same-site/local setups
+    res.cookie("token", token, {
+        httpOnly: true,
         ...(process.env.NODE_ENV === "production"
             ? { sameSite: "none", secure: true }
             : {})
     })
-    // res.send("Login success")
-    res.status(200).json({ message: "Login success", email }) //! changed here: returns json + email so the frontend can display it
+    //! the token is also returned in the body so the frontend can store it (localStorage)
+    //! and send it as an Authorization header — cookies get dropped cross-site in production
+    res.status(200).json({ message: "Login success", email, token })
 }
 
 //logout

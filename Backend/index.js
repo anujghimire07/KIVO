@@ -4,12 +4,16 @@ const app = express()
 
 //*middlewares
 const cors = require("cors");
-// app.use(cors({
-//     origin: "http://localhost:5173",//*Only allow requests coming from http://localhost:5173
-//     credentials: true //*allows cookies to be sent to and from backend/frontend
-// }))
+
+//! allow one or more comma-separated origins (e.g. local dev + Vercel). Falls back to
+//! reflecting the request origin so credentialed requests never break in production.
+const CLIENT_URLS = (process.env.CLIENT_URL || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+
 app.use(cors({
-    origin: process.env.CLIENT_URL, //! changed here: reads allowed origin from CLIENT_URL in .env (works for localhost AND the deployed Vercel URL)
+    origin: CLIENT_URLS.length ? CLIENT_URLS : true,
     credentials: true //*allows cookies to be sent to and from backend/frontend
 }))
 app.use(express.json())
