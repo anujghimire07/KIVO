@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens (from the KIVO design spec) */
+:root {
+  --color-primary: #7a9e7e;
+  --color-primary-hover: #658a69;
+  --color-primary-light: #f0f7f1;
+  --color-bg: #fdfcf9;
+  --color-surface: #ffffff;
+  --color-text: #2b2d2a;
+  --color-text-secondary: #8b9088;
+  --color-border: #e2e4de;
+  --color-sidebar: #ffffff;
+  --color-card: #ffffff;
+  --color-input: #ffffff;
+  --color-input-border: #ccd0ca;
+}
+
+.dark {
+  --color-primary: #7a9e7e;
+  --color-primary-hover: #658a69;
+  --color-primary-light: #2d312d;
+  --color-bg: #2b2d2a;
+  --color-surface: #393d39;
+  --color-text: #fdfcf9;
+  --color-text-secondary: #a0a69e;
+  --color-border: #4b5049;
+  --color-sidebar: #393d39;
+  --color-card: #393d39;
+  --color-input: #393d39;
+  --color-input-border: #5b6059;
+}
+
+/* Map the runtime tokens to Tailwind utilities */
+@theme inline {
+  --color-brand: var(--color-primary);
+  --color-brand-hover: var(--color-primary-hover);
+  --color-brand-light: var(--color-primary-light);
+  --color-soft: var(--color-bg);
+  --color-surface-bg: var(--color-surface);
+  --color-ink: var(--color-text);
+  --color-muted: var(--color-text-secondary);
+  --color-line: var(--color-border);
+  --color-sidebar-bg: var(--color-sidebar);
+  --color-card-bg: var(--color-card);
+  --color-input-bg: var(--color-input);
+  --color-input-line: var(--color-input-border);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Poppins", system-ui, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: #2e2a2a;
+  }
+}
