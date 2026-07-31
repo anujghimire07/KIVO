@@ -78,7 +78,7 @@ export default function Contact() {
                     <p className="text-[11px] uppercase tracking-widest text-white/40">
                       Address
                     </p>
-                    <p className="text-sm font-medium text-white/90">Nepal</p>
+                    <p className="text-sm font-medium text-white/90">Tikathali, Lalitpur, Nepal</p>
                   </div>
                 </div>
 
