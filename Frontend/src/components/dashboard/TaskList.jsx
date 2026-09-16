@@ -362,9 +362,9 @@ export default function TaskList() {
                       >
                         {task.completed && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
                       </button>
-                      <div className="min-w-0 flex-1">
+                      <div className="min-w-0 h-auto flex-1">
                         <p
-                          className={`truncate text-sm font-medium ${
+                          className={`break-words text-sm font-medium ${
                             task.completed ? "text-muted line-through" : "text-ink"
                           }`}
                         >
