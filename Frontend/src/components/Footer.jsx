@@ -4,7 +4,7 @@ import { FacebookIcon, GithubIcon, InstagramIcon, LinkedinIcon } from "./BrandIc
 const socials = [
   {
     name: "Instagram",
-    url: "https://www.instagram.com/anuz_ghimire_/",
+    url: "https://www.instagram.com/anuj.ghimiree/",
     color: "#E4405F",
     Icon: InstagramIcon,
   },
