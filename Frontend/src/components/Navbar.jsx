@@ -74,7 +74,7 @@ export default function Navbar() {
 
           {user ? (
             <>
-              <span className="hidden max-w-[180px] truncate text-sm text-muted sm:block">
+              <span className="hidden max-w-[180px] text-sm text-muted sm:block">
                 {user.email}
               </span>
               <button
